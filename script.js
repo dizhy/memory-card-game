@@ -58,10 +58,17 @@ let numberOfCards = 0;
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let timer = 0;
 
 function startGame() {
   const width = parseInt(document.getElementById('width').value);
   const height = parseInt(document.getElementById('height').value);
+
+  document.querySelectorAll('.level-of-game').forEach((el) => {
+    if (el.checked) {
+      timer = setLevelOfGame(el.id);
+    }
+  });
 
   if (isOutOfRange(width, 4, 11)) {
     alert('The width should be between 5 and 10');
@@ -110,6 +117,17 @@ function setUpBoard(width, height) {
 
     board.appendChild(card);
   });
+}
+
+function setLevelOfGame(level) {
+  switch (level) {
+    case 'easy':
+      return 1000;
+    case 'medium':
+      return 600;
+    case 'hard':
+      return 300;
+  }
 }
 
 function flipCard(card, emojiElement) {
@@ -162,7 +180,7 @@ function unflipCards() {
     secondCard.firstChild.style.visibility = 'hidden';
 
     reset();
-  }, 1000);
+  }, timer);
 }
 
 function reset() {
@@ -188,4 +206,3 @@ document.getElementById('start-button').addEventListener('click', startGame);
 // 1. timer
 // 2. modal
 // 3. list of records
-// 4. choosing a level of hard

@@ -8,11 +8,26 @@
   </head>
   <body>
     <div class="controls">
-      <label for="width">Width:</label>
-      <input id="width" min="4" max="11" value="4" type="number" />
+      <label class="param-label" for="width">Width:</label>
+      <input class="param-input" id="width" min="4" max="11" value="4" type="number" />
 
-      <label for="heigth">Height:</label>
-      <input id="height" min="3" max="6" value="3" type="number" />
+      <label class="param-label" for="heigth">Height:</label>
+      <input class="param-input" id="height" min="3" max="6" value="3" type="number" />
+
+      <div class="level-box">
+        <div>
+          <input class="level-of-game" id="easy" type="radio" name="level" />
+          <label for="easy">Level Easy</label>
+        </div>
+        <div>
+          <input class="level-of-game" id="medium" type="radio" name="level" checked />
+          <label for="medium">Level Medium</label>
+        </div>
+        <div>
+          <input class="level-of-game" id="hard" type="radio" name="level" />
+          <label for="hard">Level Hard</label>
+        </div>
+      </div>
 
       <button id="start-button" class="button-success">Start</button>
     </div>
