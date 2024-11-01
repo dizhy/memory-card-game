@@ -64,12 +64,12 @@ function startGame() {
   const height = parseInt(document.getElementById('height').value);
 
   if (isOutOfRange(width, 4, 11)) {
-    alert('Width must be from 4 to 11');
+    alert('The width should be between 5 and 10');
     return;
   }
 
   if (isOutOfRange(height, 3, 6)) {
-    alert('Height must be from 3 to 6');
+    alert('The height should be between 3 and 6');
     return;
   }
 
@@ -80,6 +80,7 @@ function startGame() {
 function setUpBoard(width, height) {
   const board = document.getElementById('board');
   board.innerHTML = '';
+
   board.style.gridTemplateColumns = `repeat(${width}, 100px)`;
   board.style.gridTemplateRows = `repeat(${height}, 100px)`;
 
