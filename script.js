@@ -58,7 +58,9 @@ let numberOfCards = 0;
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
-let timer = 0;
+let delayTimer = 0;
+let timer;
+let timeElapsed = 0;
 
 function startGame() {
   const width = parseInt(document.getElementById('width').value);
@@ -66,7 +68,7 @@ function startGame() {
 
   document.querySelectorAll('.level-of-game').forEach((el) => {
     if (el.checked) {
-      timer = setLevelOfGame(el.id);
+      delayTimer = setLevelOfGame(el.id);
     }
   });
 
@@ -82,6 +84,7 @@ function startGame() {
 
   reset();
   setUpBoard(width, height);
+  startTimer();
 }
 
 function setUpBoard(width, height) {
@@ -162,7 +165,8 @@ function disableCards() {
 
   const adjustedTotal = numberOfCards % 2 === 0 ? numberOfCards : numberOfCards - 1;
 
-  if (document.querySelectorAll('.card.matched').length === numberOfCards) {
+  if (document.querySelectorAll('.card.matched').length === adjustedTotal) {
+    stopTimer();
     setTimeout(() => {
       alert('Congratulations! You win!');
     }, 500);
@@ -180,7 +184,7 @@ function unflipCards() {
     secondCard.firstChild.style.visibility = 'hidden';
 
     reset();
-  }, timer);
+  }, delayTimer);
 }
 
 function reset() {
@@ -198,6 +202,25 @@ function shuffleArray(arr) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+function startTimer() {
+  timeElapsed = 0;
+  displayTime(); // Обнуление времени на дисплее
+  timer = setInterval(() => {
+    timeElapsed++;
+    displayTime();
+  }, 1000);
+}
+
+function displayTime() {
+  const minutes = Math.floor(timeElapsed / 60);
+  const seconds = timeElapsed % 60;
+  document.getElementById('timer').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function stopTimer() {
+  clearInterval(timer);
 }
 
 document.getElementById('start-button').addEventListener('click', startGame);
