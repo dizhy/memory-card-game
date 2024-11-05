@@ -62,6 +62,8 @@ let delayTimer = 0;
 let timer;
 let timeElapsed = 0;
 
+const startBtn = document.getElementById('start-button');
+
 function startGame() {
   const width = parseInt(document.getElementById('width').value);
   const height = parseInt(document.getElementById('height').value);
@@ -206,7 +208,7 @@ function shuffleArray(arr) {
 
 function startTimer() {
   timeElapsed = 0;
-  displayTime(); // Обнуление времени на дисплее
+  displayTime();
   timer = setInterval(() => {
     timeElapsed++;
     displayTime();
@@ -223,9 +225,4 @@ function stopTimer() {
   clearInterval(timer);
 }
 
-document.getElementById('start-button').addEventListener('click', startGame);
-
-// to do
-// 1. timer
-// 2. modal
-// 3. list of records
+startBtn.addEventListener('click', startGame);
